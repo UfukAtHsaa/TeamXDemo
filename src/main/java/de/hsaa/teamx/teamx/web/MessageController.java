@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1")
-public class HelloController {
+public class MessageController {
 
     private final MessageService messageService;
 
-    public HelloController(MessageService messageService) {
+    public MessageController(MessageService messageService) {
         this.messageService = messageService;
     }
 
@@ -27,5 +27,4 @@ public class HelloController {
         message.setMessage(messageContent);
         return new ResponseEntity<>(messageService.saveMessage(message), HttpStatus.OK);
     }
-
 }
