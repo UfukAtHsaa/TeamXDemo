@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/v1")
 public class MessageController {
@@ -16,15 +18,18 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @GetMapping("/hello")
-    public ResponseEntity<String> hello() {
-        return new ResponseEntity<>("hello world!", HttpStatus.OK);
+    @GetMapping("/message/{id}")
+    public ResponseEntity<Optional<Message>> getMessage(@PathVariable Long id) {
+        Optional<Message> message = messageService.loadById(id);
+        if (message.isPresent()) {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/message")
-    public ResponseEntity<Message> postMessage(@RequestBody String messageContent) {
-        Message message = new Message();
-        message.setMessage(messageContent);
+    public ResponseEntity<Message> postMessage(@RequestBody Message message) {
         return new ResponseEntity<>(messageService.saveMessage(message), HttpStatus.OK);
     }
 }

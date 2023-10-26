@@ -4,6 +4,8 @@ import de.hsaa.teamx.teamx.domain.Message;
 import de.hsaa.teamx.teamx.persistence.MessageRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MessageService {
 
@@ -17,4 +19,7 @@ public class MessageService {
         return messageRepository.save(message);
     }
 
+    public Optional<Message> loadById(Long id) {
+        return messageRepository.findById(id);
+    }
 }
