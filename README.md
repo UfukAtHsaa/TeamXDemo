@@ -1,5 +1,32 @@
 # Getting Started
 
+### Build and Run Docker Image
+
+As the Docker image does not need you to install Java or Maven it will take a while to bui
+
+1. Build the image
+> docker build -t teamx .
+2. Run the built image
+>  docker run -it --net host --rm teamx
+
+### Configure Authentication
+
+To enable Authentication please adapt the `BasicAuthenticationConfiguration`.
+Remove the authorization part:
+```java
+.authorizeHttpRequests(requests -> requests
+                        .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+                        .anyRequest().permitAll()
+                )
+```
+with
+```java
+.authorizeHttpRequests(requests -> requests
+                        .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
+                        .anyRequest().hasAnyRole("USER", "ADMIN")
+                )
+```
+
 ### Reference Documentation
 
 For further reference, please consider the following sections:
