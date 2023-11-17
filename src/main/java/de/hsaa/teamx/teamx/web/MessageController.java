@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class MessageController {
 
     private final MessageService messageService;
