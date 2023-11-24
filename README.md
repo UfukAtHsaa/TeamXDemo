@@ -7,7 +7,7 @@ As the Docker image does not need you to install Java or Maven it will take a wh
 1. Build the image
 > docker build -t teamx .
 2. Run the built image
->  docker run -it --net host --rm teamx
+>  docker run -it -p 8080:8080 --rm teamx
 
 ### Configure Authentication
 

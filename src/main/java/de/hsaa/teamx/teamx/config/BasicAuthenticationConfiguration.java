@@ -31,8 +31,8 @@ public class BasicAuthenticationConfiguration {
                 )
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(new AntPathRequestMatcher("/h2-console/**")).permitAll()
-                        .anyRequest().permitAll()
-                ) //hasAnyRole("USER", "ADMIN"))
+                        .anyRequest().hasAnyRole("USER", "ADMIN")
+                )
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .httpBasic(Customizer.withDefaults());
         return http.build();
