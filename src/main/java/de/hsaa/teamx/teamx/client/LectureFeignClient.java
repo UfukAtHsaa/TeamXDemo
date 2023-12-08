@@ -10,7 +10,8 @@ import java.util.Optional;
 
 @FeignClient(
         name = "lecture",
-        url= "http://localhost:8081"
+        url= "http://localhost:8081",
+        configuration = LecturerFeignConfig.class
 )
 public interface LectureFeignClient {
 
